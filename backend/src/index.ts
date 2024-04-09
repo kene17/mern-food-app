@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
+import userRoute from "./routes/userRoute";
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(() => {
   console.log("connected to database!");
@@ -13,6 +14,8 @@ app.use(cors());
 app.get("/test", async (req: Request, res: Response) => {
   res.json({ message: "Hello!" });
 });
+//'my' indiates to the backend that we want to do something with the current logged in user
+app.use("/api/my/user", userRoute)
 
 app.listen(4000, () => {
   console.log("server listening on localhost:7000");
