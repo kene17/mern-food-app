@@ -4,11 +4,24 @@ import './global.css'
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from './AppRoutes';
 import Auth0ProviderWithNavigate from './auth/Auth0ProviderWithNavigate';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
+const queryClient = new QueryClient({
+  //by default react-query fetches all the queries when the user has clicked away from the chrome window and decides to return 
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false
+    }
+  }
+})
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
-      <Auth0ProviderWithNavigate><AppRoutes /></Auth0ProviderWithNavigate>
+      <QueryClientProvider client={queryClient}>
+        <Auth0ProviderWithNavigate>
+          <AppRoutes />
+        </Auth0ProviderWithNavigate>
+      </QueryClientProvider>
     </Router>
   </React.StrictMode>,
 )
