@@ -2,6 +2,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation } from 'react-query';
+import { toast } from 'sonner';
 
 type CreateUserRequest = {
     auth0Id: string;
@@ -62,9 +63,16 @@ export const useUpdateMyUser = () => {
         return response.json();
 
     }
-    const { mutateAsync: updateUser, isLoading, isError, isSuccess, error, reset } = useMutation(updateMyUserRequest);
-    console.log("update user", updateUser);
-    
+    const { mutateAsync: updateUser, isLoading, isSuccess, error, reset } = useMutation(updateMyUserRequest);
+    //when the component makes changes the ui doesnt have to worry about handling errors because it's handled in the hook
+    if (isSuccess) {
+        toast.success('User profile updated');
+    }
+    if (error) {
+        toast.error(error.toString());
+        reset();//clears error state from this request
+    }
+
     return {
         updateUser,
         isLoading,
