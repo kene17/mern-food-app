@@ -15,7 +15,7 @@ const HomePage = () => {
                 <div className='flex flex-col items-center justify-center gap-4 text-center'>
                     <span className='font-bold text-3xl tracking-tighter'>Order takeaway even faster</span>
                     <span>
-                        Download the KeneEats app fot fatser ordering and personalized recommendations
+                        Download the SkipTheDishes app fot fatser ordering and personalized recommendations
                     </span>
                     <img src={appDownLoad} />
                 </div>
