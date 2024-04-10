@@ -1,5 +1,6 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+import { User } from '@/types';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation, useQuery } from 'react-query';
 import { toast } from 'sonner';
@@ -11,7 +12,7 @@ type CreateUserRequest = {
 
 export const useGetMyUser = () => {
     const { getAccessTokenSilently } = useAuth0();
-    const getMyUserRequest = async () => {
+    const getMyUserRequest = async (): Promise<User> => {
         const accessToken = await getAccessTokenSilently();
         const response = await fetch(`${API_BASE_URL}/api/my/user`, {
             method: 'GET',
