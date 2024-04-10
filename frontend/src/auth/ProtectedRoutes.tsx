@@ -3,7 +3,8 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = ()=>{
     const {isAuthenticated} = useAuth0();
-
+    //outlet: render all the child routes if user is authenticated
+    //replace makes it a new url
     return isAuthenticated ? (<Outlet/>) : (<Navigate to="/" replace />)
 
 }

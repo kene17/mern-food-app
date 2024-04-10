@@ -11,9 +11,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/test", async (req: Request, res: Response) => {
-  res.json({ message: "Hello!" });
-});
+app.get('/health', async (req: Request, res: Response) => {
+    res.send({message: "health OK!"})
+})
+
 //'my' indiates to the backend that we want to do something with the current logged in user
 app.use("/api/my/user", userRoute)
 
